@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import GetMonitoringData from './GetMonitoringData.js';
 
 dotenv.config();
 
@@ -12,6 +13,10 @@ app.get("/", (req: Request, res: Response) => {
     res.send();
 });
 
+app.get("/getData", (req: Request, res: Response) => {
+    return GetMonitoringData(req, res);
+});
+
 app.listen(port, () => {
-    console.log(` Server is up & running at http://localhost:${port}`);
+    console.log(`Server is up & running at http://localhost:${port}`);
 });
