@@ -3,11 +3,11 @@
   "name": "spacex-monitoring",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/App.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts"
+    "start": "node dist/App.js",
+    "dev": "nodemon src/App.ts"
   },
   "repository": {
     "type": "git",

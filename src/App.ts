@@ -20,3 +20,5 @@ app.get('/getData', (req: Request, res: Response) => {
 app.listen(port, () => {
     console.log(`Server is up & running at http://localhost:${port}`);
 });
+
+export default app;
