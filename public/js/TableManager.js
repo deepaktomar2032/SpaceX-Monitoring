@@ -1,10 +1,7 @@
 class TableManager {
   constructor(tableId) {
     this.table = document.getElementById(tableId);
-    this.getTableData().then(() => {
-      this.createColumns();
-      this.createRows(this.monitoringData);
-    })
+    this.searchBox = document.getElementById("searchInput");
   }
 
   async getTableData() {
@@ -24,9 +21,31 @@ class TableManager {
     this.monitoringData = await response.json();
   }
 
+  registerSearchBox() {
+    this.searchBox.addEventListener("keyup", this.showSearchResults.bind(this));
+  }
+
+  showSearchResults() {
+    const searchTerm = this.searchBox.value.toLowerCase();
+    const rows = this.table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+    for (let i = 0; i < rows.length; i++) {
+      let rowVisible = false;
+      for (let j = 0; j < rows[i].cells.length; j++) {
+        const cellValue = rows[i].cells[j].querySelector(`#spaceshipDetails`).innerHTML;
+        if (cellValue.toLowerCase().includes(searchTerm.toLowerCase())) {
+          rowVisible = true;
+          break;
+        }
+      }
+      rows[i].style.display = rowVisible ? "" : "none";
+    }
+  }
+
   createColumns() {
 
     let thead = document.createElement("thead");
+    let tbody = document.createElement("tbody");
     let headerRow = document.createElement("tr");
     const headerColumns = ['All', 'Successfull', 'Upcoming', 'Failed'];
 
@@ -41,9 +60,9 @@ class TableManager {
 
     thead.appendChild(headerRow);
     this.table.appendChild(thead);
+    this.table.appendChild(tbody);
     this.highlightColumn('all');
   }
-
 
   highlightColumn(column) {
     let headers = document.querySelectorAll("th");
@@ -58,7 +77,8 @@ class TableManager {
     cells.forEach(function (cell) {
       cell.classList.add("selected");
     });
-    this.createRows(this.monitoringData, column);
+    this.createRows(column);
+    this.searchBox.value = "";
   }
 
   deleteRows() {
@@ -69,27 +89,28 @@ class TableManager {
     }
   }
 
-  createRows(monitoringData, filter = 'all') {
+  createRows(filter = 'all') {
     this.deleteRows();
     let filteredArray;
     switch (filter) {
       case 'all':
-        filteredArray = monitoringData;
+        filteredArray = this.monitoringData;
         break;
       case 'successfull':
-        filteredArray = monitoringData.filter(data => data.success == true);
+        filteredArray = this.monitoringData.filter(data => data.success == true);
         break;
       case 'upcoming':
-        filteredArray = monitoringData.filter(data => data.upcoming == true);
+        filteredArray = this.monitoringData.filter(data => data.upcoming == true);
         break;
       case 'failed':
-        filteredArray = monitoringData.filter(data => data.success == false);
+        filteredArray = this.monitoringData.filter(data => data.success == false);
         break;
     }
 
     for (let data of filteredArray) {
       let newRow, cell;
-      newRow = this.table.insertRow();
+      let tbodyRef = this.table.getElementsByTagName('tbody')[0];
+      newRow = tbodyRef.insertRow();
       cell = newRow.insertCell();
       cell.colSpan = 4;
       cell.appendChild(this.getCellData(data));
@@ -99,6 +120,7 @@ class TableManager {
   getCellData(data) {
 
     let contentContainer = document.createElement('div');
+    contentContainer.id = 'content-container';
     contentContainer.className = 'content-container';
 
     let spaceShipImageUrl = data.links.patch.small;
@@ -108,6 +130,7 @@ class TableManager {
 
     let spaceShipName = data.name;
     let heading = document.createElement('h2');
+    heading.id = "spaceshipDetails";
     heading.textContent = spaceShipName;
     heading.style.color = 'black';
     contentContainer.appendChild(heading);
