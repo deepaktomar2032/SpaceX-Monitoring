@@ -70,32 +70,28 @@ class TableManager {
 
   createRows(monitoringData, filter = 'all') {
     this.deleteRows();
-    for (let data of monitoringData) {
-      if (filter == 'all') {
-        let newRow, cell;
-        newRow = this.table.insertRow();
-        cell = newRow.insertCell();
-        cell.colSpan = 4;
-        cell.appendChild(this.getCellData(data));
-      } else if (filter == 'failed' && data.success == false) {
-        let newRow, cell;
-        newRow = this.table.insertRow();
-        cell = newRow.insertCell();
-        cell.colSpan = 4;
-        cell.appendChild(this.getCellData(data));
-      } else if (filter == 'successfull' && data.success == true) {
-        let newRow, cell;
-        newRow = this.table.insertRow();
-        cell = newRow.insertCell();
-        cell.colSpan = 4;
-        cell.appendChild(this.getCellData(data));
-      } else if (filter == 'upcoming' && data.upcoming == true) {
-        let newRow, cell;
-        newRow = this.table.insertRow();
-        cell = newRow.insertCell();
-        cell.colSpan = 4;
-        cell.appendChild(this.getCellData(data));
-      }
+    let filteredArray;
+    switch (filter) {
+      case 'all':
+        filteredArray = monitoringData;
+        break;
+      case 'successfull':
+        filteredArray = monitoringData.filter(data => data.success == true);
+        break;
+      case 'upcoming':
+        filteredArray = monitoringData.filter(data => data.upcoming == true);
+        break;
+      case 'failed':
+        filteredArray = monitoringData.filter(data => data.success == false);
+        break;
+    }
+
+    for (let data of filteredArray) {
+      let newRow, cell;
+      newRow = this.table.insertRow();
+      cell = newRow.insertCell();
+      cell.colSpan = 4;
+      cell.appendChild(this.getCellData(data));
     }
   }
 
