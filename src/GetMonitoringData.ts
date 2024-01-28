@@ -1,17 +1,17 @@
-import { Request, Response } from "express";
-import fetch from "node-fetch";
+import { Request, Response } from 'express';
+import fetch from 'node-fetch';
 
 const requestParams = {
     headers: {
         Accept: 'application/json',
-        method: "GET"
+        method: 'GET'
     },
 };
 
 const GetMonitoringData = async (req: Request, res: Response) => {
 
     let spaceData = null;
-    const url = "https://api.spacexdata.com/v5/launches/";
+    const url = 'https://api.spacexdata.com/v5/launches/';
 
     try {
         spaceData = await fetch(url, requestParams);

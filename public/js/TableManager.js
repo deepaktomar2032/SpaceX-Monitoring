@@ -1,14 +1,13 @@
 class TableManager {
   constructor(tableId) {
     this.table = document.getElementById(tableId);
-    this.searchBox = document.getElementById("searchInput");
   }
 
   async getTableData() {
     const requestParams = {
       headers: {
         Accept: 'application/json',
-        method: "GET"
+        method: 'GET'
       },
     };
 
@@ -16,45 +15,23 @@ class TableManager {
     try {
       response = await fetch('/getData', requestParams);
     } catch (error) {
-      console.log("something went wrong");
+      console.log('something went wrong');
     }
     this.monitoringData = await response.json();
   }
 
-  registerSearchBox() {
-    this.searchBox.addEventListener("keyup", this.showSearchResults.bind(this));
-  }
-
-  showSearchResults() {
-    const searchTerm = this.searchBox.value.toLowerCase();
-    const rows = this.table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-
-    for (let i = 0; i < rows.length; i++) {
-      let rowVisible = false;
-      for (let j = 0; j < rows[i].cells.length; j++) {
-        const cellValue = rows[i].cells[j].querySelector(`#spaceshipDetails`).innerHTML;
-        if (cellValue.toLowerCase().includes(searchTerm.toLowerCase())) {
-          rowVisible = true;
-          break;
-        }
-      }
-      rows[i].style.display = rowVisible ? "" : "none";
-    }
-  }
-
   createColumns() {
-
-    let thead = document.createElement("thead");
-    let tbody = document.createElement("tbody");
-    let headerRow = document.createElement("tr");
+    let thead = document.createElement('thead');
+    let tbody = document.createElement('tbody');
+    let headerRow = document.createElement('tr');
     const headerColumns = ['All', 'Successfull', 'Upcoming', 'Failed'];
 
     for (let i = 0; i < headerColumns.length; i++) {
-      let th = document.createElement("th");
+      let th = document.createElement('th');
       th.style.color = 'black';
       th.textContent = headerColumns[i];
       th.dataset.column = headerColumns[i].toLowerCase();
-      th.addEventListener("click", this.highlightColumn.bind(this, th.dataset.column));
+      th.addEventListener('click', this.highlightColumn.bind(this, th.dataset.column));
       headerRow.appendChild(th);
     }
 
@@ -65,20 +42,20 @@ class TableManager {
   }
 
   highlightColumn(column) {
-    let headers = document.querySelectorAll("th");
+    let headers = document.querySelectorAll('th');
     headers.forEach(function (header) {
-      header.classList.remove("selected");
+      header.classList.remove('selected');
     });
 
-    let clickedHeader = document.querySelector("th[data-column='" + column + "']");
-    clickedHeader.classList.add("selected");
+    let clickedHeader = document.querySelector(`th[data-column= ${column} ] `);
+    clickedHeader.classList.add('selected');
 
-    let cells = document.querySelectorAll("td[data-column='" + column + "']");
+    let cells = document.querySelectorAll(`td[data-column= ${column} ]`);
     cells.forEach(function (cell) {
-      cell.classList.add("selected");
+      cell.classList.add('selected');
     });
     this.createRows(column);
-    this.searchBox.value = "";
+    document.getElementById('searchInput').value = '';
   }
 
   deleteRows() {
@@ -130,7 +107,7 @@ class TableManager {
 
     let spaceShipName = data.name;
     let heading = document.createElement('h2');
-    heading.id = "spaceshipDetails";
+    heading.id = 'spaceshipDetails';
     heading.textContent = spaceShipName;
     heading.style.color = 'black';
     contentContainer.appendChild(heading);
@@ -180,7 +157,7 @@ class TableManager {
       smallText1.style.color = 'Blue';
     }
 
-    smallText1.textContent = launchStatus + " " + 'Launch';
+    smallText1.textContent = `${launchStatus} Launch`;
     smallText1.className = 'small-text';
 
     contentContainer.appendChild(document.createElement('br'));
@@ -188,7 +165,7 @@ class TableManager {
 
     if (launchStatus == 'Failed') {
       let smallText2 = document.createElement('span');
-      smallText2.textContent = 'Failure Details' + ": " + failedReason;
+      smallText2.textContent = `Failure Details: ${failedReason}`;
       smallText2.className = 'small-text';
       contentContainer.appendChild(document.createElement('br'));
       contentContainer.appendChild(smallText2);
@@ -198,7 +175,7 @@ class TableManager {
     launchDate.toString();
 
     let smallText3 = document.createElement('span');
-    smallText3.textContent = 'Launch Date' + ": " + launchDate;
+    smallText3.textContent = `Launch Date: ${launchDate}`;
     smallText3.className = 'small-text';
 
     contentContainer.appendChild(document.createElement('br'));
