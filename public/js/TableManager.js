@@ -41,6 +41,7 @@ class TableManager {
 
     thead.appendChild(headerRow);
     this.table.appendChild(thead);
+    this.highlightColumn('all');
   }
 
 
@@ -164,7 +165,7 @@ class TableManager {
 
     if (launchStatus == 'Failed') {
       let smallText2 = document.createElement('span');
-      smallText2.textContent = 'Reason of Failure' + ": " + failedReason;
+      smallText2.textContent = 'Failure Details' + ": " + failedReason;
       smallText2.className = 'small-text';
       contentContainer.appendChild(document.createElement('br'));
       contentContainer.appendChild(smallText2);
