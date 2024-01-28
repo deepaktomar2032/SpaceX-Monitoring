@@ -1,5 +1,3 @@
-import lang from './../json/lang.json' assert { type: "json" };
-
 class TableManager {
   constructor(tableId) {
     this.table = document.getElementById(tableId);
@@ -24,39 +22,20 @@ class TableManager {
       console.log("something went wrong");
     }
     this.monitoringData = await response.json();
-    console.log('monitoringData', this.monitoringData);
   }
 
   createColumns() {
 
-    var thead = document.createElement("thead");
-    var headerRow = document.createElement("tr");
-    const headerColumns = [lang["en"].All, lang["en"].Successfull, lang["en"].Upcoming, lang["en"].Failed];
+    let thead = document.createElement("thead");
+    let headerRow = document.createElement("tr");
+    const headerColumns = ['All', 'Successfull', 'Upcoming', 'Failed'];
 
-    for (var i = 0; i < headerColumns.length; i++) {
-      var th = document.createElement("th");
+    for (let i = 0; i < headerColumns.length; i++) {
+      let th = document.createElement("th");
       th.style.color = 'black';
       th.textContent = headerColumns[i];
       th.dataset.column = headerColumns[i].toLowerCase();
-      th.onclick = function () {
-
-        highlightColumn(this.dataset.column);
-
-        function highlightColumn(column) {
-          var headers = document.querySelectorAll("th");
-          headers.forEach(function (header) {
-            header.classList.remove("selected");
-          });
-
-          var clickedHeader = document.querySelector("th[data-column='" + column + "']");
-          clickedHeader.classList.add("selected");
-
-          var cells = document.querySelectorAll("td[data-column='" + column + "']");
-          cells.forEach(function (cell) {
-            cell.classList.add("selected");
-          });
-        }
-      };
+      th.addEventListener("click", this.highlightColumn.bind(this, th.dataset.column));
       headerRow.appendChild(th);
     }
 
@@ -64,17 +43,63 @@ class TableManager {
     this.table.appendChild(thead);
   }
 
-  createRows(monitoringData, filter = lang["en"].All) {
-    for (let data of monitoringData) {
-      let newRow, cell;
-      newRow = this.table.insertRow();
-      cell = newRow.insertCell();
-      cell.colSpan = 4;
-      cell.appendChild(this.getCellData(data, filter));
+
+  highlightColumn(column) {
+    let headers = document.querySelectorAll("th");
+    headers.forEach(function (header) {
+      header.classList.remove("selected");
+    });
+
+    let clickedHeader = document.querySelector("th[data-column='" + column + "']");
+    clickedHeader.classList.add("selected");
+
+    let cells = document.querySelectorAll("td[data-column='" + column + "']");
+    cells.forEach(function (cell) {
+      cell.classList.add("selected");
+    });
+    this.createRows(this.monitoringData, column);
+  }
+
+  deleteRows() {
+    let rows = this.table.rows;
+    for (let i = rows.length - 1; i > 0; i--) {
+      let row = rows[i];
+      row.parentNode.removeChild(row);
     }
   }
 
-  getCellData(data, filter) {
+  createRows(monitoringData, filter = 'all') {
+    this.deleteRows();
+    for (let data of monitoringData) {
+      if (filter == 'all') {
+        let newRow, cell;
+        newRow = this.table.insertRow();
+        cell = newRow.insertCell();
+        cell.colSpan = 4;
+        cell.appendChild(this.getCellData(data));
+      } else if (filter == 'failed' && data.success == false) {
+        let newRow, cell;
+        newRow = this.table.insertRow();
+        cell = newRow.insertCell();
+        cell.colSpan = 4;
+        cell.appendChild(this.getCellData(data));
+      } else if (filter == 'successfull' && data.success == true) {
+        let newRow, cell;
+        newRow = this.table.insertRow();
+        cell = newRow.insertCell();
+        cell.colSpan = 4;
+        cell.appendChild(this.getCellData(data));
+      } else if (filter == 'upcoming' && data.upcoming == true) {
+        let newRow, cell;
+        newRow = this.table.insertRow();
+        cell = newRow.insertCell();
+        cell.colSpan = 4;
+        cell.appendChild(this.getCellData(data));
+      }
+    }
+  }
+
+  getCellData(data) {
 
     let contentContainer = document.createElement('div');
     contentContainer.className = 'content-container';
@@ -123,27 +148,27 @@ class TableManager {
 
     let smallText1 = document.createElement('span');
     let launchStatus, failedReason;
-    if (data.upcoming == false && data.success == false) {
-      launchStatus = lang['en'].Failed;
+    if (data.success == false) {
+      launchStatus = 'Failed';
       smallText1.style.color = 'red';
       failedReason = data.details;
-    } else if (data.upcoming == false && data.success == true) {
-      launchStatus = lang['en'].Successfull;
+    } else if (data.success == true) {
+      launchStatus = 'Successfull';
       smallText1.style.color = 'Lime';
-    } else {
-      launchStatus = lang['en'].Upcoming;
+    } else if (data.upcoming == true) {
+      launchStatus = 'Upcoming';
       smallText1.style.color = 'Blue';
     }
 
-    smallText1.textContent = launchStatus + " " + lang['en'].Launch;
+    smallText1.textContent = launchStatus + " " + 'Launch';
     smallText1.className = 'small-text';
 
     contentContainer.appendChild(document.createElement('br'));
     contentContainer.appendChild(smallText1);
 
-    if (launchStatus == lang['en'].Failed) {
+    if (launchStatus == 'Failed') {
       let smallText2 = document.createElement('span');
-      smallText2.textContent = lang['en'].Failed_Reason + ": " + failedReason;
+      smallText2.textContent = 'Reason of Failure' + ": " + failedReason;
       smallText2.className = 'small-text';
       contentContainer.appendChild(document.createElement('br'));
       contentContainer.appendChild(smallText2);
@@ -153,7 +178,7 @@ class TableManager {
     launchDate.toString();
 
     let smallText3 = document.createElement('span');
-    smallText3.textContent = lang['en'].Launch_Date + ": " + launchDate;
+    smallText3.textContent = 'Launch Date' + ": " + launchDate;
     smallText3.className = 'small-text';
 
     contentContainer.appendChild(document.createElement('br'));
