@@ -1,14 +1,11 @@
 *,
 *:after,
 *:before {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
 body {
-	font-family: arial;
+	font-family: Arial, sans-serif;
 	font-size: 16px;
 	margin: 0;
 	background: #6ebce2;
@@ -20,7 +17,7 @@ body {
 
 input,
 select {
-	background-color: #fff !important;
+	background-color: #fff;
 }
 
 .container {
@@ -38,11 +35,6 @@ table tfoot tr th {
 .selected {
 	background-color: lightblue;
 }
-
-#example_filter {
-	margin-bottom: 20px;
-}
-
 
 table {
 	width: 100%;
@@ -93,11 +85,7 @@ img {
 	color: black;
 }
 
-* {
-	box-sizing: border-box;
-  }
-  
-  #searchInput {
+#searchInput {
 	background-image: url('./../img/searchicon.png');
 	background-position: 10px 12px;
 	background-repeat: no-repeat;
@@ -106,15 +94,15 @@ img {
 	padding: 12px 20px 12px 40px;
 	border: 1px solid #ddd;
 	margin-bottom: 12px;
-  }
-  
-  #myUL {
+}
+
+#myUL {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-  }
-  
-  #myUL li a {
+}
+
+#myUL li a {
 	border: 1px solid #ddd;
 	margin-top: -1px;
 	background-color: #f6f6f6;
@@ -122,9 +110,9 @@ img {
 	text-decoration: none;
 	font-size: 18px;
 	color: black;
-	display: block
-  }
-  
-  #myUL li a:hover:not(.header) {
+	display: block;
+}
+
+#myUL li a:hover:not(.header) {
 	background-color: #eee;
-  }
+}

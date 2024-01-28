@@ -24,7 +24,7 @@ class TableManager {
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody');
     let headerRow = document.createElement('tr');
-    const headerColumns = ['All', 'Successfull', 'Upcoming', 'Failed'];
+    const headerColumns = ['All', 'Successful', 'Upcoming', 'Failed'];
 
     for (let i = 0; i < headerColumns.length; i++) {
       let th = document.createElement('th');
@@ -73,7 +73,7 @@ class TableManager {
       case 'all':
         filteredArray = this.monitoringData;
         break;
-      case 'successfull':
+      case 'successful':
         filteredArray = this.monitoringData.filter(data => data.success == true);
         break;
       case 'upcoming':
@@ -150,7 +150,7 @@ class TableManager {
       smallText1.style.color = 'red';
       failedReason = data.details;
     } else if (data.success == true) {
-      launchStatus = 'Successfull';
+      launchStatus = 'Successful';
       smallText1.style.color = 'Lime';
     } else if (data.upcoming == true) {
       launchStatus = 'Upcoming';
