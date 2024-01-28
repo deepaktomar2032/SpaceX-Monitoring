@@ -1,0 +1,94 @@
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: arial;
+	font-size: 16px;
+	margin: 0;
+	background: #6ebce2;
+	color: #000;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+input,
+select {
+	background-color: #fff !important;
+}
+
+.container {
+	max-width: 1100px;
+	width: 100%;
+}
+
+table thead tr td,
+table thead tr th,
+table tfoot tr td,
+table tfoot tr th {
+	color: #fff;
+}
+
+.selected {
+	background-color: lightblue;
+}
+
+#example_filter {
+	margin-bottom: 20px;
+}
+
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+th,
+td {
+	border: 1px solid black;
+	padding: 10px;
+	text-align: center;
+}
+
+img {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	margin-right: 20px;
+}
+
+.content-container {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	max-width: 70%;
+}
+
+.icon-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.icon-container img {
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+}
+
+.small-text {
+	display: block;
+	margin-top: 5px;
+	font-size: 30px;
+	color: black;
+}
