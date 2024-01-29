@@ -1,5 +1,4 @@
-import { Request, Response } from 'express';
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 
 const requestParams = {
     headers: {
@@ -8,22 +7,20 @@ const requestParams = {
     },
 };
 
-const GetMonitoringData = async (req: Request, res: Response) => {
+const getMonitoringData = async (req, res) => {
 
-    let spaceData = null;
+    let spaceData;
     const url = 'https://api.spacexdata.com/v5/launches/';
-
     try {
         spaceData = await fetch(url, requestParams);
+        
     } catch (err) {
         console.log(err);
         return res.status(500).json({ error: 'Could not fetch data from API' });
     }
 
     const spaceDataParsed = await spaceData.json();
-    
-    return res.json(spaceDataParsed);
+    return res.status(200).json(spaceDataParsed);
+};
 
-}
-
-export default GetMonitoringData;
+module.exports = getMonitoringData;
