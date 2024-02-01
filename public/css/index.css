@@ -1,140 +1,140 @@
 *,
 *:after,
 *:before {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-	font-family: Arial, sans-serif;
-	font-size: 16px;
-	margin: 0;
-	background: #6ebce2;
-	color: #000;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  background: #6ebce2;
+  color: #000;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 input,
 select {
-	background-color: #fff;
+  background-color: #fff;
 }
 
 .container {
-	max-width: 1100px;
-	width: 100%;
-	margin: 0 auto;
-	/* Center the container */
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  /* Center the container */
 }
 
 .selected {
-	background-color: lightblue;
+  background-color: lightblue;
 }
 
 table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
 th,
 td {
-	border: 1px solid black;
-	padding: 10px;
-	text-align: center;
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
 }
 
 img {
-	width: 100%;
-	max-width: 100px;
-	/* Limit the maximum width of the image */
-	height: auto;
-	/* Maintain aspect ratio */
-	object-fit: cover;
-	margin-right: 20px;
+  width: 100%;
+  max-width: 100px;
+  /* Limit the maximum width of the image */
+  height: auto;
+  /* Maintain aspect ratio */
+  object-fit: cover;
+  margin-right: 20px;
 }
 
 .content-container {
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	max-width: 100%;
-	/* Full width on smaller screens */
-	padding: 10px;
-	/* Add some padding for better readability */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 100%;
+  /* Full width on smaller screens */
+  padding: 10px;
+  /* Add some padding for better readability */
 }
 
 .icon-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .icon-container img {
-	width: 20px;
-	height: 20px;
-	margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 
 .small-text {
-	display: block;
-	margin-top: 5px;
-	font-size: 18px;
-	/* Adjust font size for smaller screens */
-	color: black;
+  display: block;
+  margin-top: 5px;
+  font-size: 18px;
+  /* Adjust font size for smaller screens */
+  color: black;
 }
 
 #searchInput {
-	background-image: url('./../img/searchicon.png');
-	background-position: 10px 12px;
-	background-repeat: no-repeat;
-	width: 100%;
-	font-size: 16px;
-	padding: 12px 20px 12px 40px;
-	border: 1px solid #ddd;
-	margin-bottom: 12px;
+  background-image: url("./../img/searchicon.png");
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
 }
 
 #myUL {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 #myUL li a {
-	border: 1px solid #ddd;
-	margin-top: -1px;
-	background-color: #f6f6f6;
-	padding: 12px;
-	text-decoration: none;
-	font-size: 18px;
-	color: black;
-	display: block;
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
 }
 
 #myUL li a:hover:not(.header) {
-	background-color: #eee;
+  background-color: #eee;
 }
 
 /* Media Query for Mobile Devices */
 @media only screen and (max-width: 600px) {
-	img {
-		margin-right: 0;
-		/* Remove margin for images on smaller screens */
-	}
+  img {
+    margin-right: 0;
+    /* Remove margin for images on smaller screens */
+  }
 
-	.icon-container img {
-		margin-right: 0;
-	}
+  .icon-container img {
+    margin-right: 0;
+  }
 
-	#searchInput {
-		padding: 12px;
-	}
+  #searchInput {
+    padding: 12px;
+  }
 
-	#myUL li a {
-		font-size: 16px;
-	}
+  #myUL li a {
+    font-size: 16px;
+  }
 }
