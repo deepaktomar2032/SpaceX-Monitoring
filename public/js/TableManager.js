@@ -74,13 +74,13 @@ class TableManager {
         filteredArray = this.monitoringData;
         break;
       case 'successful':
-        filteredArray = this.monitoringData.filter(data => data.success == true);
+        filteredArray = this.monitoringData.filter(data => data.success === true);
         break;
       case 'upcoming':
-        filteredArray = this.monitoringData.filter(data => data.upcoming == true);
+        filteredArray = this.monitoringData.filter(data => data.upcoming === true);
         break;
       case 'failed':
-        filteredArray = this.monitoringData.filter(data => data.success == false);
+        filteredArray = this.monitoringData.filter(data => data.success === false);
         break;
     }
 
@@ -145,14 +145,14 @@ class TableManager {
 
     let smallText1 = document.createElement('span');
     let launchStatus, failedReason;
-    if (data.success == false) {
+    if (data.success === false) {
       launchStatus = 'Failed';
       smallText1.style.color = 'red';
       failedReason = data.details;
-    } else if (data.success == true) {
+    } else if (data.success === true) {
       launchStatus = 'Successful';
       smallText1.style.color = 'Lime';
-    } else if (data.upcoming == true) {
+    } else if (data.upcoming === true) {
       launchStatus = 'Upcoming';
       smallText1.style.color = 'Blue';
     }
@@ -163,7 +163,7 @@ class TableManager {
     contentContainer.appendChild(document.createElement('br'));
     contentContainer.appendChild(smallText1);
 
-    if (launchStatus == 'Failed') {
+    if (launchStatus === 'Failed') {
       let smallText2 = document.createElement('span');
       smallText2.textContent = `Failure Details: ${failedReason}`;
       smallText2.className = 'small-text';
