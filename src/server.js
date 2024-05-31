@@ -16,7 +16,9 @@ const createRoutes = () => {
 
 const start = async () => {
     try {
-        listenPort(Number(Port));
+        if (process.env.NODE_ENV !== "test") {
+            listenPort(Number(Port));
+        }
         createRoutes();
         app.use(express.static("public"));
     } catch (error) {
