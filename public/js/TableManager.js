@@ -13,11 +13,12 @@ class TableManager {
 
     let response = null;
     try {
-      response = await fetch("/getData", requestParams);
+      response = await fetch("/api/data", requestParams);
     } catch (error) {
       console.log("something went wrong");
     }
-    this.monitoringData = await response.json();
+    const data = await response.json();
+    this.monitoringData = data.spaceDataParsed;
   }
 
   createColumns() {

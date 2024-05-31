@@ -2,19 +2,24 @@
 
 
 # Run following commands to install the dependencies & run the project
-- npm i
-- npm start (Please make sure port 3000 on your local machine isn't being used by some service, if so update the port no. in bin/www file & retry)
+- `npm i`
+- `npm start` (Make sure port 8000 on your local machine isn't being used by some service, if so update the port no. in server.js & retry)
 - npm run test (To run the test cases)
-- Open http://localhost:3000/ or http://127.0.0.1:3000/ or http://<Your private IP>:3000/
+- Open http://localhost:8000/ or http://127.0.0.1:8000/ or http://<Your private IP>:8000/
 
 
-# Project Folder Structure & Steps Taken
+# Project Folder Structure
 - src (Backend)
-    - app.js - Entry point of server & serves the response on /getData api end point
-    - dataController.js - Responsible to hit spaceX api, fetching data & sending back to client
+    - index.js - Entry point of server
+    - server.js - Helps to create server
+    - routes.js - create routes
+    - controller/
+        - has controller required to serve the request
+    - utils/
+        - has common modules used through out the project
 - tests (Test folder)
     - app.test.js - To manage test cases
-- bin/www - Entry point to run the server & keeps env/port info.
+
 - public (Frontend)
     - index.html - Entry point html file
     - js/index.js - Entry point javascript file that initializes TableManager
@@ -23,7 +28,7 @@
 
 
 # Flow & API End point
-- Front-end hits a backend api /getData
+- Front-end hits a backend api /api/data
 - Back-end hits SpaceX api end point ie https://api.spacexdata.com/v5/launches/, fetches data & respond to Front-end
 - Front-end receives the data & renders it in a table
 
