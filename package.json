@@ -17,7 +17,7 @@
     "homepage": "https://github.com/deepaktomar2031/SpaceX-Monitoring#readme",
     "dependencies": {
         "dotenv": "^16.4.5",
-        "express": "^4.19.2"
+        "express": "^4.20.0"
     },
     "devDependencies": {
         "@types/express": "^4.17.21",
